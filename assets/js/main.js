@@ -1,9 +1,5 @@
 /**
-* Template Name: Lonely
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-lonely/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+
 */
 (function() {
   "use strict";
@@ -191,6 +187,46 @@
 
   });
 
+
+   /**
+   * Certificates isotope and filter
+   */
+
+   window.addEventListener('load', () => {
+    let portfolioContainer = document.querySelector('.certificates-container');
+  
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.certificates-item',
+        layoutMode: 'fitRows'
+      });
+  
+      // Arrange the Isotope grid to show .filter-app items on load.
+      portfolioIsotope.arrange({
+        filter: '.filter-app'
+      });
+  
+      let portfolioFilters = document.querySelectorAll('#certificates-flters li');
+  
+      // Add event listeners for the filter buttons (as in the original code).
+      portfolioFilters.forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          portfolioFilters.forEach(function(el) {
+            el.classList.remove('filter-active');
+          });
+          this.classList.add('filter-active');
+  
+          portfolioIsotope.arrange({
+            filter: this.getAttribute('data-filter')
+          });
+        });
+      });
+    }
+  });
+  
+  
+
   /**
    * Initiate portfolio lightbox 
    */
@@ -232,33 +268,7 @@
     })
   }
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 40
-      },
-
-      1200: {
-        slidesPerView: 3,
-      }
-    }
-  });
+  
 
   /**
    * Initiate Pure Counter 
